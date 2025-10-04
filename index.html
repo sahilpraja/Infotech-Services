@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resume Service</title>
+  <style>
+    /* Reset and Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f7f7;
+      color: #1c1c1c;
+      line-height: 1.5;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Header */
+    header {
+      background: #fff;
+      padding: 1rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #1c1c1c;
+    }
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      margin-right: 0.5rem;
+    }
+    .logo-text-small {
+      font-size: 0.8rem;
+      color: #777;
+      font-weight: 400;
+      margin-top: 0.15rem;
+      line-height: 1;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+    nav ul li {
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #333;
+    }
+    nav ul li:hover {
+      color: #f56b89;
+    }
+    .btn-quote {
+      background: #f56b89;
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      padding: 0.55rem 1.6rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(245,107,137,0.55);
+      transition: background-color 0.3s ease;
+    }
+    .btn-quote:hover {
+      background: #e0526e;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(90deg, #ffc7d0 0%, #ffd3db 100%);
+      padding: 4rem 1rem 6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      position: relative;
+      overflow: visible;
+    }
+    .hero-left {
+      max-width: 600px;
+      flex: 1;
+    }
+    .hero-left h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin: 0 0 0.5rem;
+      color: #141414;
+      line-height: 1.1;
+    }
+    .highlight-red {
+      color: #f53e4a;
+      text-decoration: underline 3px solid #f53e4a;
+      text-underline-offset: 6px;
+    }
+    .hero-left p {
+      color: #3b3b3b;
+      font-size: 0.9rem;
+      margin-top: 1.25rem;
+      line-height: 1.6;
+      max-width: 480px;
+      font-weight: 500;
+    }
+    .btn-group {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+    .btn-outline {
+      padding: 0.5rem 1.5rem;
+      border-radius: 24px;
+      border: 1.7px solid #f53e4a;
+      font-weight: 600;
+      font-size: 0.9rem;
+      background: white;
+      color: #f53e4a;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(245,62,74,0.3);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      min-width: 140px;
+      text-align: center;
+    }
+    .btn-outline:hover {
+      background: #f53e4a;
+      color: white;
+      box-shadow: 0 6px 12px rgba(245,62,74,0.7);
+    }
+    .btn-filled {
+      padding: 0.5rem 1.5rem;
+      border-radius: 24px;
+      border: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      background: #f53e4a;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(245,62,74,0.55);
+      min-width: 140px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+    .btn-filled:hover {
+      background: #e0526e;
+    }
+
+    /* Hero Right Image */
+    .hero-right {
+      position: relative;
+      flex: 1;
+      max-width: 460px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-right img {
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      max-width: 400px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+    }
+    .hero-right::before {
+      content: "";
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      background: #ffccd5;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    /* Info Cards on Hero Image */
+    .info-card {
+      position: absolute;
+      background: white;
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .info-card .rating-value {
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: #24b981;
+      margin-right: 0.15rem;
+    }
+    .info-card .stars {
+      color: #ffb800;
+      margin-right: 0.25rem;
+      display: flex;
+      gap: 2px;
+      font-size: 1rem;
+    }
+    .info-card .subtext {
+      color: #333;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .info-card svg {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      fill: #f53e4a;
+    }
+
+    .rating-card {
+      top: 90px;
+      left: -30px;
+      width: 170px;
+    }
+    .resume-count-card {
+      bottom: 20px;
+      right: -20px;
+      width: 190px;
+      gap: 0.8rem;
+    }
+    .resume-count-card .count {
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: #f53e4a;
+      white-space: nowrap;
+    }
+
+    /* Section What You Get */
+    section.what-you-get {
+      padding: 3rem 1rem 6rem;
+      background: white;
+      text-align: center;
+    }
+    .what-you-get-header {
+      display: inline-block;
+      background: #ffdbe0;
+      color: #f53e4a;
+      font-weight: 600;
+      padding: 0.35rem 1.2rem;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+    .what-you-get-title {
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+    .what-you-get-title .highlight {
+      color: #f53e4a;
+    }
+    .cards-wrapper {
+      margin-top: 3rem;
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      justify-items: center;
+    }
+
+    /* Cards */
+    .feature-card {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 0 15px rgba(223, 223, 223, 0.65);
+      padding: 1.75rem 1.5rem 2rem;
+      max-width: 280px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+      user-select: none;
+    }
+    .feature-card svg {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 0.6rem;
+      fill: #f53e4a;
+    }
+    .feature-card h4 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #141414;
+      line-height: 1.2;
+    }
+    .feature-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #5a5a5a;
+      font-weight: 500;
+      line-height: 1.4;
+      padding: 0 0.3rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero {
+        flex-direction: column;
+        padding-bottom: 3rem;
+      }
+      .hero-left, .hero-right {
+        max-width: 100%;
+        flex: none;
+        width: 100%;
+        text-align: center;
+      }
+      .hero-right {
+        margin-top: 2rem;
+      }
+      .info-card {
+        position: static;
+        margin: 0.4rem auto;
+      }
+      .cards-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <a href="#" class="logo">
+      <svg class="logo-img" viewBox="0 0 24 24" fill="#f53e4a" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M3 7L7 3C9 1 13 0 17 4C23 11 10 22 7 17C5 14 3 12 3 7Z"/>
+      </svg>
+      <div>
+        COMPANY <br />
+        <span class="logo-text-small">business tagline</span>
+      </div>
+    </a>
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>About Us</li>
+        <li>Our Services</li>
+        <li>Pricing</li>
+        <li>FAQ</li>
+      </ul>
+    </nav>
+    <button class="btn-quote">Get A Quote</button>
+  </header>
+
+  <section class="hero container">
+    <div class="hero-left">
+      <h1>
+        Your Resume<br />
+        <span class="highlight-red">Deserves A Yes</span> Let’s Make It Happen
+      </h1>
+      <p>
+        If Your Resume Isn’t Getting Responses, It’s Time For An Upgrade.<br />
+        Get An ATS-Optimized Resume Crafted By HR Experts To Help You Land More Interviews.
+        Our Resumes Are Designed To Get Your Foot In The Door And Place Your Name At The Top Of The Shortlist.
+      </p>
+      <div class="btn-group">
+        <button class="btn-outline">RESUME PACKAGES</button>
+        <button class="btn-filled">CONTACT US</button>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <img src="hero preview.png" alt="Girl with books and phone" />
+      <div class="info-card rating-card" aria-label="Instructor rating 4.9 stars">
+        <span class="rating-value">4.9</span>
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span class="subtext">Instructor Rating</span>
+      </div>
+      <div class="info-card resume-count-card" aria-label="260 plus online resumes created">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6v8l-8 5-8-5V6l8-5 8 5z"/></svg>
+        <div>
+          <span class="count">260+</span><br />
+          Online Resume Created
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="what-you-get container" aria-labelledby="what-you-get-title">
+    <div class="what-you-get-header">What You Get</div>
+    <h2 id="what-you-get-title" class="what-you-get-title">
+      You’re Not Just <span class="highlight">Another Applicant</span> And Your Resume Shouldn’t Look Like One
+    </h2>
+
+    <div class="cards-wrapper">
+      <!-- Card 1 -->
+      <article class="feature-card" aria-label="A Resume Format That Gets You Interviews">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <img src="/Users/sahilprajapati/Desktop/Infotech Services/interview.png" alt="" height="190px" width="190px" />
+        </svg>
+        <h4>A Resume Format That Gets You Interviews</h4>
+        <p>
+          Get a professionally written, keyword-optimized resume that lands in recruiter inboxes.
+        </p>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="feature-card" aria-label="A Cover Letter Style That Stands Out Strong">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <img src="/Users/sahilprajapati/Desktop/Infotech Services/cover latter.png" alt=""  height="190px" width="190px"/>
+        </svg>
+        <h4>A Cover Letter Style That Stands Out Strong</h4>
+        <p>
+          Stand out with a cover letter that speaks directly to the role and reflects your strengths.
+        </p>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="feature-card" aria-label="A LinkedIn Profile That Works For You">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+           <img src="/Users/sahilprajapati/Desktop/Infotech Services/linkdin.png" alt="" height="190px" width="190px" />
+        </svg>
+        <h4>A LinkedIn Profile That Works For You</h4>
+        <p>
+          Attract the right eyes, start conversations, and show up in recruiter searches.
+        </p>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="feature-card" aria-label="An Interview Strategy That Builds Confidence">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <img src="interview.png" alt="" height="190px" width="190px"/>
+        </svg>
+        <h4>An Interview Strategy That Builds Confidence</h4>
+        <p>
+          Interview preparation with real HR professionals so you speak clearly confidently.
+        </p>
+      </article>
+    </div>
+  </section>
+</body>
+</html>
